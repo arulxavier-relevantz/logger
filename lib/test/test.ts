@@ -1,9 +1,8 @@
-import { CSDLogger } from "../Logger"
+import { Logger } from "../Logger"
 
-CSDLogger.init("mongodb://localhost/employees", false);
+Logger.init("mongodb://localhost/employees", false);
 
-
-CSDLogger.log("Hello again distributed log");
-CSDLogger.info("Hello again distributed info");
-CSDLogger.error("Hello again distributed error");
+Logger.log("Hello again distributed log");
+Logger.info("Hello again distributed info");
+Logger.error("Hello again distributed error");
 

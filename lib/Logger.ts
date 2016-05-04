@@ -3,7 +3,7 @@
 import * as winston from "winston";
 import * as path from "path";
 
-class CSDLogger {
+class Logger {
 
     static logger;
     static dbLogger;
@@ -86,4 +86,4 @@ class CSDLogger {
     }
 }
 
-export { CSDLogger }
+export { Logger }

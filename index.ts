@@ -1,1 +1,1 @@
-export { CSDLogger } from "./lib/Logger"
+export { Logger } from "./lib/Logger"
