@@ -1,0 +1,29 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "declaration": true,   
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "preserveConstEnums": true,
+    "moduleResolution": "node",
+    "removeComments": true,
+    "sourceMap": true,
+    "target": "ES6",
+    "pretty":true,
+    "noLib": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    //"sortOutput":true
+    "outDir": "out"
+  },
+
+ "exclude": [
+        "node_modules",
+        "dist",
+        "typings/browser",
+        "typings/browser.d.ts",
+        "coverage"
+  ]
+}
+
+

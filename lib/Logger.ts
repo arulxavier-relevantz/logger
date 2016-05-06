@@ -1,7 +1,6 @@
-///// <reference path="../typings/main.d.ts" />
-
 import * as winston from "winston";
 import * as path from "path";
+import * as fs from "fs";
 
 class Logger {
 
@@ -9,8 +8,18 @@ class Logger {
     static dbLogger;
     static isDB;
 
-    public static init(_db: string, _isDB: boolean) {
+    public static init(_db: string, _isDB: boolean, _logPath: string) {
 
+
+        var fs = require('fs');
+        var dir = _logPath +'/logs';
+        
+        console.log("dir " + dir);
+        
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir);
+        }
+        
         this.isDB = _isDB;
         const _dailyRotateFile = require('winston-daily-rotate-file');
 
@@ -21,7 +30,7 @@ class Logger {
 
         const _infoFileOption = <winston.FileTransportOptions>{
             datePattern: '.yyyy-MM-ddTHH',
-            filename: path.join(__dirname, "../logs", "filelog-info.log"),
+            filename: path.join(_logPath, "logs", "filelog-info.log"),
             handleExceptions: true,
             humanReadableUnhandledException: true,
             json: false,
