@@ -1,6 +1,13 @@
 import { Logger } from "../Logger"
 
-Logger.init("mongodb://localhost/employees", false, __dirname);
+var loggerConfig = {
+          "dir": "/Users/carestream/app/sinopia/entity/asd-microservice-logger",
+          "fileName": "microservice-employee.log",
+          "dbURL": "mongodb://localhost/employees",
+          "logDB": false
+      }
+
+Logger.init(loggerConfig);
 
 Logger.log("Hello again distributed log");
 Logger.info("Hello again distributed info");

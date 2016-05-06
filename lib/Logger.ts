@@ -8,16 +8,16 @@ class Logger {
     static dbLogger;
     static isDB;
 
-    public static init(_db: string, _isDB: boolean, _logPath: string) {
+    public static init(loggerConfig: any) {
 
-        let dirPath = path.resolve(_logPath, "..");        
-        dirPath = dirPath + "/logs";
+        let dirPath = loggerConfig.dir + "/logs";     
+        
                 
         if (!fs.existsSync(dirPath)) {
             fs.mkdirSync(dirPath);
         }
         
-        this.isDB = _isDB;
+        this.isDB = loggerConfig.logDB;
         const _dailyRotateFile = require('winston-daily-rotate-file');
 
         const _consoleOptions = <winston.ConsoleTransportOptions>{
@@ -27,7 +27,7 @@ class Logger {
 
         const _infoFileOption = <winston.FileTransportOptions>{
             datePattern: '.yyyy-MM-ddTHH',
-            filename: path.resolve(dirPath, "filelog-info.log"),
+            filename: path.resolve(dirPath, loggerConfig.fileName),
             handleExceptions: true,
             humanReadableUnhandledException: true,
             json: false,
@@ -37,7 +37,7 @@ class Logger {
         const _mongoDBOption = <winston.FileTransportOptions>{
             capped: true,
             collection: "log",
-            db: _db,
+            db: loggerConfig.dbURL,
             tryReconnect: false
         }
 
