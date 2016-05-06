@@ -4,7 +4,8 @@ var loggerConfig = {
           "dir": "/Users/carestream/app/sinopia/entity/asd-microservice-logger",
           "fileName": "microservice-employee.log",
           "dbURL": "mongodb://localhost/employees",
-          "logDB": false
+          "db": false,
+          "file": true
       }
 
 Logger.init(loggerConfig);

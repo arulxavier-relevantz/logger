@@ -7,6 +7,7 @@ class Logger {
     static logger;
     static dbLogger;
     static isDB;
+    static isFile;
 
     public static init(loggerConfig: any) {
 
@@ -17,7 +18,9 @@ class Logger {
             fs.mkdirSync(dirPath);
         }
         
-        this.isDB = loggerConfig.logDB;
+        this.isDB = loggerConfig.db;
+        this.isFile = loggerConfig.file;
+        
         const _dailyRotateFile = require('winston-daily-rotate-file');
 
         const _consoleOptions = <winston.ConsoleTransportOptions>{
@@ -69,7 +72,7 @@ class Logger {
 
         if (this.isDB) {
             this.dbLogger.log('info', message);
-        } else {
+        } else if (this.isFile) {
             this.logger.log('info', message);
         }
     }
@@ -78,7 +81,7 @@ class Logger {
 
         if (this.isDB) {
             this.dbLogger.info(message);
-        } else {
+        } else if (this.isFile) {
             this.logger.info(message);
         }
     }
@@ -86,7 +89,7 @@ class Logger {
     public static error(message: any) {
         if (this.isDB) {
             this.dbLogger.error(message);
-        } else {
+        } else if (this.isFile) {
             this.logger.error(message);
         }
     }
