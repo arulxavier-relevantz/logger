@@ -10,14 +10,11 @@ class Logger {
 
     public static init(_db: string, _isDB: boolean, _logPath: string) {
 
-
-        var fs = require('fs');
-        var dir = _logPath +'/logs';
-        
-        console.log("dir " + dir);
-        
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir);
+        let dirPath = path.resolve(_logPath, "..");        
+        dirPath = dirPath + "/logs";
+                
+        if (!fs.existsSync(dirPath)) {
+            fs.mkdirSync(dirPath);
         }
         
         this.isDB = _isDB;
@@ -30,7 +27,7 @@ class Logger {
 
         const _infoFileOption = <winston.FileTransportOptions>{
             datePattern: '.yyyy-MM-ddTHH',
-            filename: path.join(_logPath, "logs", "filelog-info.log"),
+            filename: path.resolve(dirPath, "filelog-info.log"),
             handleExceptions: true,
             humanReadableUnhandledException: true,
             json: false,
