@@ -1,6 +1,6 @@
 {
-  "name": "asd-microservice-logger",
-  "version": "0.0.1",
+  "name": "logger",
+  "version": "1.0.0",
   "description": "Micro Service Logger",
   "main": "index.js",
   "scripts": {
