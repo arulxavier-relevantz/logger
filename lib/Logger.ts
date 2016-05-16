@@ -1,17 +1,31 @@
 import * as winston from "winston";
 import * as path from "path";
 import * as fs from "fs";
-
+let packageJson = require("../package.json");
 class Logger {
 
     static logger;
     static dbLogger;
     static isDB;
     static isFile;
+    static isConsoleLog;
 
     public static init(loggerConfig: any) {
 
-        let dirPath = loggerConfig.dir + "/logs";
+        let dirPath;
+
+        if (!loggerConfig.dir) {
+
+            if (packageJson._args) {
+                dirPath = packageJson._args[0][1] + "/logs";
+            } else {
+                dirPath = "logs"
+            }
+        } else {
+            dirPath = loggerConfig.dir + "/logs";
+        }
+
+        dirPath = loggerConfig.dir + "/logs";
 
 
         if (!fs.existsSync(dirPath)) {
@@ -20,6 +34,7 @@ class Logger {
 
         this.isDB = loggerConfig.db;
         this.isFile = loggerConfig.file;
+        this.isConsoleLog = loggerConfig.consoleLog;
 
         const _dailyRotateFile = require('winston-daily-rotate-file');
 
@@ -52,7 +67,11 @@ class Logger {
         });
 
         this.logger = winston.loggers.get('logger');
-        this.logger.remove(winston.transports.Console);
+        console.log(this.isConsoleLog);
+        if (!this.isConsoleLog) {
+            this.logger.remove(winston.transports.Console);
+        }
+
 
         if (this.isDB) {
             var mongoDB = require('winston-mongodb').MongoDB;
