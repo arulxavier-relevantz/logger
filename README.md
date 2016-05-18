@@ -6,7 +6,7 @@
 
 ```bash
 git clone <Git URL>
-cd base-service
+cd logger
 npm install
 ```
 
