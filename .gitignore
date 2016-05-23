@@ -3,3 +3,4 @@ node_modules
 typings/**/*
 !/typings/index.d.ts
 logs
+*.js
